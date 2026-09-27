@@ -1,0 +1,7 @@
+{
+  "name": "corti-site",
+  "private": true,
+  "scripts": {
+    "build": "node -e \"console.log('static site, nothing to compile')\""
+  }
+}

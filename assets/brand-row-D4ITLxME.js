@@ -1,0 +1,1 @@
+import{n as e,w as t}from"./index-CcPoyU3b.js";var n=t();function r(){return(0,n.jsx)(`ul`,{className:`grid grid-cols-2 gap-4 md:grid-cols-4`,children:e.map(e=>(0,n.jsx)(`li`,{className:`grid h-28 place-items-center rounded-lg border border-line bg-paper px-6`,children:(0,n.jsx)(`img`,{src:e.img,alt:e.name,className:`max-h-12 w-auto object-contain`})},e.name))})}export{r as t};
