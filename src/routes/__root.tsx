@@ -96,7 +96,7 @@ function RootComponent() {
           <FloatingCtas />
           <Toaster position="top-center" richColors />
         </AuthProvider>
-        <Scripts />
+        {import.meta.env.DEV ? <Scripts /> : <script src="/corti.js" defer />}
       </body>
     </html>
   );

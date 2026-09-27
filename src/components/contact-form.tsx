@@ -7,27 +7,36 @@ import { site } from "@/lib/site";
 
 export function ContactForm() {
   const [name, setName] = useState("");
-  const [mobile, setMobile] = useState("");
-  const [message, setMessage] = useState("");
   const [sent, setSent] = useState(false);
 
   function onSubmit(e: FormEvent) {
     e.preventDefault();
-    const digits = mobile.replace(/\D/g, "");
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    const nextName = String(data.get("fullname") ?? "").trim();
+    const nextMobile = String(data.get("mobile") ?? "").trim();
+    const nextMessage = String(data.get("message") ?? "").trim();
+    const digits = nextMobile.replace(/\D/g, "");
     if (digits.length < 10) {
       toast.error("Please enter a valid 10-digit mobile number.");
       return;
     }
     const text = encodeURIComponent(
-      `Hello Corti Hearing Clinic,\n\nName: ${name}\nMobile: ${mobile}\n\n${message}`,
+      `Hello Corti Hearing Clinic,\n\nName: ${nextName}\nMobile: ${nextMobile}\n\n${nextMessage}`,
     );
     try {
       const prev = JSON.parse(localStorage.getItem("corti-enquiries") ?? "[]") as unknown[];
-      prev.push({ name, mobile, message, at: new Date().toISOString() });
+      prev.push({
+        name: nextName,
+        mobile: nextMobile,
+        message: nextMessage,
+        at: new Date().toISOString(),
+      });
       localStorage.setItem("corti-enquiries", JSON.stringify(prev));
     } catch {
       /* ignore quota */
     }
+    setName(nextName);
     setSent(true);
     toast.success("Opening WhatsApp so you can send your enquiry.");
     window.open(`${site.whatsappUrl}&text=${text}`, "_blank", "noopener");
@@ -55,8 +64,6 @@ export function ContactForm() {
         <input
           required
           name="fullname"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
           placeholder="Full name *"
           className="h-12 w-full rounded-md border border-line bg-paper px-4 text-sm outline-none focus:border-gold focus:ring-2 focus:ring-gold/30"
         />
@@ -68,8 +75,6 @@ export function ContactForm() {
           name="mobile"
           type="tel"
           inputMode="tel"
-          value={mobile}
-          onChange={(e) => setMobile(e.target.value)}
           placeholder="Mobile number *"
           className="h-12 w-full rounded-md border border-line bg-paper px-4 text-sm outline-none focus:border-gold focus:ring-2 focus:ring-gold/30"
         />
@@ -80,8 +85,6 @@ export function ContactForm() {
           required
           name="message"
           rows={8}
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
           placeholder="Message *"
           className="w-full rounded-md border border-line bg-paper px-4 py-3 text-sm outline-none focus:border-gold focus:ring-2 focus:ring-gold/30"
         />

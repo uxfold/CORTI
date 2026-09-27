@@ -5,7 +5,10 @@ import { useState } from "react";
 export function Faq() {
   const [open, setOpen] = useState(0);
   return (
-    <div className="mx-auto max-w-3xl divide-y divide-line rounded-lg border border-line bg-paper">
+    <div
+      data-faq
+      className="mx-auto max-w-3xl divide-y divide-line rounded-lg border border-line bg-paper"
+    >
       {faqs.map((item, i) => {
         const isOpen = open === i;
         return (
@@ -18,6 +21,7 @@ export function Faq() {
             >
               <span className="font-medium">{item.q}</span>
               <span
+                data-faq-icon
                 className={cn(
                   "grid size-8 shrink-0 place-items-center rounded-pill bg-mist text-lg leading-none",
                   isOpen && "bg-gold",
@@ -26,9 +30,15 @@ export function Faq() {
                 {isOpen ? "–" : "+"}
               </span>
             </button>
-            {isOpen ? (
-              <p className="px-6 pb-5 text-sm leading-relaxed text-muted">{item.a}</p>
-            ) : null}
+            <p
+              data-faq-answer
+              className={cn(
+                "px-6 pb-5 text-sm leading-relaxed text-muted",
+                !isOpen && "hidden",
+              )}
+            >
+              {item.a}
+            </p>
           </div>
         );
       })}

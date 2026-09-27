@@ -116,56 +116,61 @@ export function Header() {
         </Button>
       </div>
 
-      {open ? (
-        <div className="fixed inset-0 z-50 lg:hidden">
-          <button
-            type="button"
-            className="absolute inset-0 bg-ink/50"
-            aria-label="Close menu"
-            onClick={() => setOpen(false)}
-          />
-          <div className="absolute inset-y-0 right-0 flex w-[min(20rem,88vw)] flex-col bg-ink px-8 py-8 text-paper shadow-xl">
-            <div className="mb-8 flex items-center justify-between">
-              <img src="/images/logo.png" alt="" className="h-10 rounded-md bg-paper p-1" />
-              <button
-                type="button"
-                onClick={() => setOpen(false)}
-                className="grid size-11 place-items-center text-paper"
-                aria-label="Close menu"
-              >
-                <X className="size-7" />
-              </button>
-            </div>
-            <nav className="flex flex-col gap-1" aria-label="Mobile">
-              {nav.map((item) => {
-                const active =
-                  item.to === "/"
-                    ? pathname === "/"
-                    : pathname === item.to;
-                return (
-                  <Link
-                    key={item.to}
-                    to={item.to}
-                    className={cn(
-                      "border-b border-paper/10 py-3 text-lg",
-                      active ? "text-gold" : "text-paper",
-                    )}
-                  >
-                    {item.label}
-                  </Link>
-                );
-              })}
-              <Link
-                to="/contact"
-                className="mt-6 inline-flex h-12 items-center justify-center gap-2 rounded-pill bg-gold text-sm font-medium text-ink"
-              >
-                Contact Us
-                <ArrowRight className="size-4" />
-              </Link>
-            </nav>
+      <div
+        id="mobile-menu"
+        className={cn("fixed inset-0 z-50 lg:hidden", !open && "hidden")}
+      >
+        <button
+          type="button"
+          data-close-menu
+          className="absolute inset-0 bg-ink/50"
+          aria-label="Close menu"
+          onClick={() => setOpen(false)}
+        />
+        <div className="absolute inset-y-0 right-0 flex w-[min(20rem,88vw)] flex-col bg-ink px-8 py-8 text-paper shadow-xl">
+          <div className="mb-8 flex items-center justify-between">
+            <img src="/images/logo.png" alt="" className="h-10 rounded-md bg-paper p-1" />
+            <button
+              type="button"
+              data-close-menu
+              onClick={() => setOpen(false)}
+              className="grid size-11 place-items-center text-paper"
+              aria-label="Close menu"
+            >
+              <X className="size-7" />
+            </button>
           </div>
+          <nav className="flex flex-col gap-1" aria-label="Mobile">
+            {nav.map((item) => {
+              const active =
+                item.to === "/"
+                  ? pathname === "/"
+                  : pathname === item.to;
+              return (
+                <Link
+                  key={item.to}
+                  to={item.to}
+                  data-close-menu
+                  className={cn(
+                    "border-b border-paper/10 py-3 text-lg",
+                    active ? "text-gold" : "text-paper",
+                  )}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
+            <Link
+              to="/contact"
+              data-close-menu
+              className="mt-6 inline-flex h-12 items-center justify-center gap-2 rounded-pill bg-gold text-sm font-medium text-ink"
+            >
+              Contact Us
+              <ArrowRight className="size-4" />
+            </Link>
+          </nav>
         </div>
-      ) : null}
+      </div>
     </header>
   );
 }
