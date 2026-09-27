@@ -1,0 +1,21 @@
+Corti Hearing Clinic — static website
+======================================
+
+Upload EVERYTHING in this folder to the web root of corti.in
+(usually public_html). index.html must sit directly in that folder,
+not inside another folder.
+
+Before you replace the live site, download a backup of the current
+public_html.
+
+cPanel / Hostinger / GoDaddy
+1. Open File Manager.
+2. Go to public_html (or the folder mapped to corti.in).
+3. Upload corti-hearing-clinic.zip.
+4. Extract it so you see index.html, assets/, images/, about/, contact/, and .htaccess in public_html.
+5. Visit https://corti.in and click every menu item.
+
+Do not put this site in a subfolder. Image and style links start with /
+and only work from the domain root.
+
+The contact form opens WhatsApp. No database and no Node.js are required.

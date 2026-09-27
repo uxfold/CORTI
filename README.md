@@ -27,11 +27,27 @@ This is a modern recreation of the original clinic website: same copy, photograp
 
 Hours: Monday–Saturday, 10:00 AM – 6:30 PM
 
-## Deploy (new hosting)
+## Deploy (your own hosting)
 
-Easiest path is **Vercel**: import the `uxfold/CORTI` GitHub repo, leave the build command as `npm run build`, and publish.
+The finished website — real HTML, CSS, images, and `.htaccess` — is in **[public_html/](public_html/)**.
 
-Any other Node host that can run a Vite / TanStack Start app will also work.
+That folder is what you upload. Do not upload `src/` or run a Node server.
+
+1. Back up the current `public_html` on corti.in.
+2. Download this repo, or just the `public_html` folder.
+3. Upload **the contents** of `public_html` (so `index.html` is directly in the host’s web root, not inside another folder).
+4. Open https://corti.in and click through the menu.
+
+The contact form opens WhatsApp. No database.
+
+To rebuild that folder from source:
+
+```bash
+npm install
+npm run build:static
+```
+
+The new files are written to `.output/public`. Copy them over `public_html/` before you upload again.
 
 ## Local development
 
@@ -40,7 +56,7 @@ npm install
 npm run dev
 ```
 
-Production build:
+Production source build (not what you upload):
 
 ```bash
 npm run build
