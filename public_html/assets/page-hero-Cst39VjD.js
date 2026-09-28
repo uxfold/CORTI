@@ -1,0 +1,1 @@
+import{w as e}from"./index-g4VuEnkU.js";import{t}from"./section-heading-BA_xo_t3.js";var n=e();function r({fade:e,accent:r,title:i}){return(0,n.jsx)(`section`,{className:`border-b border-line bg-cream py-16 md:py-24`,children:(0,n.jsx)(`div`,{className:`site-grid`,children:(0,n.jsx)(t,{fade:e,accent:r,title:i})})})}export{r as t};

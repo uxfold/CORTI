@@ -1,5 +1,29 @@
 (() => {
+  const header = document.querySelector("header");
   const menu = document.getElementById("mobile-menu");
+
+  function fitNav() {
+    if (!header) return;
+    const nav = header.querySelector("[aria-label='Primary']");
+    const row = header.querySelector(".nav-row");
+    const logo = row && row.querySelector("a");
+    if (!nav || !row || !logo) return;
+    header.classList.remove("nav-force-full", "nav-force-compact");
+    const available = row.clientWidth - logo.getBoundingClientRect().width - 24;
+    const previous = nav.style.cssText;
+    nav.style.cssText = "display:flex;position:absolute;visibility:hidden;pointer-events:none;";
+    const needed = nav.scrollWidth;
+    nav.style.cssText = previous;
+    const fits = needed <= available;
+    header.classList.add(fits ? "nav-force-full" : "nav-force-compact");
+    if (fits && menu) {
+      menu.classList.add("hidden");
+      document.body.style.overflow = "";
+    }
+  }
+
+  fitNav();
+  window.addEventListener("resize", fitNav);
   const openBtn = document.querySelector("[aria-label='Open menu']");
   if (menu && openBtn) {
     const close = () => {

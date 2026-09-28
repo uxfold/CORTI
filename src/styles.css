@@ -79,6 +79,34 @@
   margin-inline: auto;
 }
 
+/* Full menu when the row can hold it. The script refines this after measuring. */
+.nav-desktop {
+  display: none;
+}
+.nav-toggle {
+  display: inline-flex;
+}
+@media (min-width: 960px) {
+  .nav-desktop {
+    display: flex;
+  }
+  .nav-toggle {
+    display: none;
+  }
+}
+header.nav-force-full .nav-desktop {
+  display: flex;
+}
+header.nav-force-full .nav-toggle {
+  display: none;
+}
+header.nav-force-compact .nav-desktop {
+  display: none;
+}
+header.nav-force-compact .nav-toggle {
+  display: inline-flex;
+}
+
 @media (min-width: 768px) {
   .site-grid {
     width: min(1180px, calc(100% - 4rem));
